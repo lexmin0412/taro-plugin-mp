@@ -68,6 +68,7 @@ export default (ctx) => {
     fs.writeFileSync('./project.config.json', projectConfig)
 
     console.log(chalk.blueBright('结束 '), 'project.config.json生成成功✅');
+    console.log('')
   });
 }
 

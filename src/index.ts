@@ -17,6 +17,7 @@ export default (ctx) => {
   } = ctx
 
   ctx.onBuildStart(() => {
+    console.log('')
     console.log(chalk.yellow('插件 '), 'taro-plugin-mp');
     console.log(chalk.greenBright('开始 '), '准备生成project.config.json文件')
     console.log(chalk.magentaBright('读取 '), '小程序appid ', APP_CONF.APPID)

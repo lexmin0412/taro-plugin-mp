@@ -7,6 +7,7 @@ const fs = require('fs');
 exports.default = (ctx) => {
     const { initialConfig: { defineConstants: { APP_CONF } }, helper: { chalk } } = ctx;
     ctx.onBuildStart(() => {
+        console.log('');
         console.log(chalk.yellow('插件 '), 'taro-plugin-mp');
         console.log(chalk.greenBright('开始 '), '准备生成project.config.json文件');
         console.log(chalk.magentaBright('读取 '), '小程序appid ', APP_CONF.APPID);
@@ -56,6 +57,7 @@ exports.default = (ctx) => {
 `;
         fs.writeFileSync('./project.config.json', projectConfig);
         console.log(chalk.blueBright('结束 '), 'project.config.json生成成功✅');
+        console.log('');
     });
 };
 //# sourceMappingURL=index.js.map

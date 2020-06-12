@@ -1,3 +1,3 @@
-# taro-plugin-check-env
+# taro-plugin-mp
 
-taro插件，用于在编译前的环境变量检查。
+taro小程序端插件，目前仅用于不同环境下project.config.json文件的动态生成。

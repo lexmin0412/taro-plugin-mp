@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require('fs');
 exports.default = (ctx) => {
-    const { initialConfig: { defineConstants: { APP_CONF } }, helper: { chalk } } = ctx;
+    const { initialConfig: { defineConstants: { APP_CONF } }, helper: { chalk }, runOpts } = ctx;
     ctx.onBuildStart(() => {
         console.log('');
         console.log(chalk.yellow('插件 '), 'taro-plugin-mp');
@@ -15,8 +15,12 @@ exports.default = (ctx) => {
         if (fs.existsSync('./project.config.json')) {
             const projectConfigTemplate = fs.readFileSync('./project.config.json').toString().split('\n');
             const pageLine = projectConfigTemplate.findIndex(item => item.indexOf('appid') > -1);
+            // appid替换
             projectConfigTemplate[pageLine] = `  "appid": ${APP_CONF.APPID},`;
             const templateStr = `${projectConfigTemplate.join('\n')}`;
+            // 项目名称替换
+            const nameLine = projectConfigTemplate.findIndex(item => item.indexOf('projectname') > -1);
+            projectConfigTemplate[nameLine] = `  "projectname": "${runOpts.config.projectName}",`;
             fs.writeFileSync('./project.config.json', templateStr);
         }
         else {
@@ -24,7 +28,7 @@ exports.default = (ctx) => {
             const projectConfig = `
 {
   "miniprogramRoot": "./dist",
-  "projectname": "taro-template",
+  "projectname": "${runOpts.config.projectName || 'Taro2.x项目模板'}",
   "description": "taro2.0项目模板",
   "appid": ${APP_CONF.APPID},
   "setting": {

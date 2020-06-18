@@ -1,6 +1,6 @@
 {
   "name": "taro-plugin-mp",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "taro小程序端插件，目前仅用于根据不同环境生成不同端project.config.json文件",
   "main": "index.js",
   "scripts": {

@@ -16,7 +16,7 @@ exports.default = (ctx) => {
             const projectConfigTemplate = fs.readFileSync('./project.config.json').toString().split('\n');
             const pageLine = projectConfigTemplate.findIndex(item => item.indexOf('appid') > -1);
             // appid替换
-            projectConfigTemplate[pageLine] = `  "appid": ${APP_CONF.APPID},`;
+            projectConfigTemplate[pageLine] = `  "appid": "${APP_CONF.APPID}",`;
             const templateStr = `${projectConfigTemplate.join('\n')}`;
             // 项目名称替换
             const nameLine = projectConfigTemplate.findIndex(item => item.indexOf('projectname') > -1);
@@ -30,7 +30,7 @@ exports.default = (ctx) => {
   "miniprogramRoot": "./dist",
   "projectname": "${runOpts.config.projectName || 'Taro2.x项目模板'}",
   "description": "taro2.0项目模板",
-  "appid": ${APP_CONF.APPID},
+  "appid": "${APP_CONF.APPID}",
   "setting": {
     "urlCheck": true,
     "es6": false,

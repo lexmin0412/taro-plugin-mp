@@ -3,14 +3,13 @@
  */
 
 const fs = require('fs')
+import isTPL from './isTPL'
 
 export default (ctx) => {
   const {
     initialConfig: {
       defineConstants: {
         APP_CONF,
-        IS_MP_TPL,
-        MP_TPL_APPID
       }
     },
     helper: {
@@ -19,12 +18,13 @@ export default (ctx) => {
     runOpts
   } = ctx
 
+  const isMpTemplate = isTPL()
   ctx.onBuildStart(() => {
     console.log('');
     console.log(chalk.yellow('插件 '), 'taro-plugin-mp');
     console.log(chalk.greenBright('开始 '), '准备生成project.config.json文件');
     console.log(chalk.magentaBright('读取 '), '小程序appid ', APP_CONF.APPID);
-    const USE_APPID = IS_MP_TPL ? MP_TPL_APPID : APP_CONF.APPID
+    const USE_APPID = isMpTemplate ? APP_CONF.MP_TPL_APPID : APP_CONF.APPID
 
     // 已存在则直接读取本地文件
     if (fs.existsSync('./project.config.json')) {

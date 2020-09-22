@@ -2,6 +2,8 @@
 
 taro小程序端插件，目前仅用于不同环境下project.config.json文件的动态生成。
 
+查看更新日志请前往[CHANGELOG](https://github.com/cathe-zhang/taro-plugin-mp/blob/master/CHANGELOG.md)
+
 ## Usage
 
 ### 在不同的配置文件中配置不同的 APP_CONF.APPID

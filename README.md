@@ -32,14 +32,27 @@ module.exports = {
 
 ### 指定当前小程序为第三方开发模版小程序
 
+第一步，在 config 文件中指定模版小程序 appid
+
 ```js
 // config/index.js
 module.exports = {
   defineConstants: {
-    IS_MP_TPL: isTPL, // 是否打包为模版小程序
-    MP_TPL_APPID: '', // 这里写模版小程序appid
+    APP_CONF: {
+      MP_TPL_APPID: '', // 这里写模版小程序appid
+    }
   }
 }
 ```
 
-在这里声明IS_MP_TPL为true时，可指定编译为对应填入的appid对应的小程序。
+第二步，在package.json 中添加如下脚本
+
+```json
+{
+  "scripts": {
+    "build:mp-pro-tpl": "taro build --type weapp env=pro --tpl",  // --tpl 参数用于插件判断是否打包为模版小程序
+  }
+}
+```
+
+这样，在编译完成之后，打包的就是 APP_CONF 中指定的 MP_TPL_APPID 对应的第三方模版小程序了。

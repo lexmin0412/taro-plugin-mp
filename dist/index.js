@@ -4,14 +4,16 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require('fs');
+const isTPL_1 = require("./isTPL");
 exports.default = (ctx) => {
-    const { initialConfig: { defineConstants: { APP_CONF, IS_MP_TPL, MP_TPL_APPID } }, helper: { chalk }, runOpts } = ctx;
+    const { initialConfig: { defineConstants: { APP_CONF, } }, helper: { chalk }, runOpts } = ctx;
+    const isMpTemplate = isTPL_1.default();
     ctx.onBuildStart(() => {
         console.log('');
         console.log(chalk.yellow('插件 '), 'taro-plugin-mp');
         console.log(chalk.greenBright('开始 '), '准备生成project.config.json文件');
         console.log(chalk.magentaBright('读取 '), '小程序appid ', APP_CONF.APPID);
-        const USE_APPID = IS_MP_TPL ? MP_TPL_APPID : APP_CONF.APPID;
+        const USE_APPID = isMpTemplate ? APP_CONF.MP_TPL_APPID : APP_CONF.APPID;
         // 已存在则直接读取本地文件
         if (fs.existsSync('./project.config.json')) {
             const projectConfigTemplate = fs.readFileSync('./project.config.json').toString().split('\n');
